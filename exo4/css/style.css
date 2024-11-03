@@ -1,0 +1,28 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    background: linear-gradient(rgb(10, 0, 147), rgb(255, 0, 0));;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+@font-face {
+    font-family: 'fourmi';
+    src: url('fonts/fourmi.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'quarant';
+    src: url('fonts/Quarantype.otf') format('opentype');
+}

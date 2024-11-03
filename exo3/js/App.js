@@ -2,7 +2,7 @@ import DrawingTool from "./DrawingTool.js";
 
 // Fonction pour charger le SVG et obtenir le chemin du "G"
 async function loadSVG() {
-  const response = await fetch("G.svg");
+  const response = await fetch("./public/G.svg");
   const svgText = await response.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(svgText, "image/svg+xml");

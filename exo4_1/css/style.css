@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  /* Changer le curseur pour montrer qu'on peut cliquer */
+}
+
+svg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  visibility: hidden;
+  /* SVG caché au départ */
+}
+
+.particle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(38, 255, 0, 0.8), rgba(0, 150, 255, 0.8), rgba(255, 0, 150, 0.8));
+  pointer-events: fill;
+  z-index: 2;
+  /* Les particules doivent être au-dessus du SVG */
+}

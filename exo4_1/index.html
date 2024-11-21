@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exo4_New</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+<body>
+  <div id="svgContainer"></div>
+
+  <script>
+    // Fonction pour insérer le SVG dans le DOM
+    function loadSVG() {
+      fetch('letter.svg')
+        .then(response => response.text())
+        .then(data => {
+          const svgContainer = document.getElementById('svgContainer');
+          svgContainer.innerHTML = data;
+          const svg = svgContainer.querySelector('svg');
+          svg.setAttribute('width', '200');
+          svg.setAttribute('height', '200');
+
+          // Cacher le SVG au départ
+          svg.style.visibility = 'hidden';
+
+          // Ajouter les particules lors d'un clic n'importe où sur l'écran
+          document.body.addEventListener('click', (e) => {
+            if (svg.style.visibility === 'hidden') {
+              svg.style.visibility = 'hidden';
+            }
+            const rect = svg.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            createParticles(x, y, svg);  // Créer des particules à la position du clic
+          });
+        });
+    }
+
+    // Fonction pour créer des particules le long du chemin de la lettre "M"
+    function createParticles(x, y, svg) {
+      const numParticles = 200;  // Nombre de particules à générer par clic
+
+      // Récupérer le chemin de la lettre "M" dans le SVG
+      const path = svg.querySelector('path');
+      const pathLength = path.getTotalLength();
+
+      for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        // Calculer un point le long du chemin du SVG
+        const point = path.getPointAtLength((i / numParticles) * pathLength);
+
+        // Positionner la particule à cet endroit
+        particle.style.left = `${point.x + svg.getBoundingClientRect().left}px`;
+        particle.style.top = `${point.y + svg.getBoundingClientRect().top}px`;
+
+        // Ajouter la particule au body
+        document.body.appendChild(particle);
+
+        // Animation des particules
+        const dx = (Math.random() - 0.5) * 6;
+        const dy = (Math.random() - 0.5) * 6;
+        const duration = Math.random() * 2 + 1;
+
+        particle.animate([
+          { transform: 'scale(1)', opacity: 1 },
+          { transform: `translate(${dx * 100}px, ${dy * 100}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: duration * 2000,
+          easing: 'ease-out',
+          iterations: 1,
+          fill: 'forwards'
+        });
+
+        // Supprimer la particule après l'animation
+        setTimeout(() => {
+          particle.remove();
+        }, duration * 2000);
+      }
+    }
+
+    // Charger le SVG au démarrage
+    loadSVG();
+  </script>
+
+</body>
+
+</html>
+
+</html>
